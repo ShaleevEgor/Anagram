@@ -1,7 +1,10 @@
 package com.shaleev.anagram;
 
-public class AnagramMakerTest {
-    /*
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class AnagramMakerTest {
     private final AnagramMaker anagramMaker = new AnagramMaker();
 
     @Test
@@ -12,28 +15,25 @@ public class AnagramMakerTest {
         assertEquals(actual, expected);
     }
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     @Test
     public void makeAnagramShouldThrowExceptionIfNull() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("text is null");
-        anagramMaker.makeAnagram(null);
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                () -> anagramMaker.makeAnagram(null));
+        assertEquals("text is null", exception.getMessage());
     }
 
     @Test
     public void makeAnagramShouldReturnSomethingWhenEmpty() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("text is empty");
-        anagramMaker.makeAnagram("").isEmpty();
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                () -> anagramMaker.makeAnagram(""));
+        assertEquals("text is empty", exception.getMessage());
     }
 
     @Test
     public void makeAnagramShouldReturnSomethingWhenSingleSpace() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("text contains only spaces or/and tabs");
-        anagramMaker.makeAnagram("  ");
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                () -> anagramMaker.makeAnagram("  "));
+        assertEquals("text contains only spaces or/and tabs", exception.getMessage());
     }
 
     @Test
@@ -75,5 +75,4 @@ public class AnagramMakerTest {
 
         assertEquals(actual, expected);
     }
-    */
 }
