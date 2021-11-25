@@ -1,47 +1,43 @@
 package com.shaleev.anagram;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class AnagramMakerTest {
+class AnagramMakerTest {
     private final AnagramMaker anagramMaker = new AnagramMaker();
 
     @Test
-    public void makeAnagramShouldReturnAnagramForOneWordSentenceJustWithLetters() {
+    void makeAnagramShouldReturnAnagramForOneWordSentenceJustWithLetters() {
         String actual = anagramMaker.makeAnagram("Egor");
         String expected = "rogE";
 
         assertEquals(actual, expected);
     }
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     @Test
-    public void makeAnagramShouldThrowExceptionIfNull() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("text is null");
-        anagramMaker.makeAnagram(null);
+    void makeAnagramShouldThrowExceptionIfNull() {
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                () -> anagramMaker.makeAnagram(null));
+        assertEquals("text is null", exception.getMessage());
     }
 
     @Test
-    public void makeAnagramShouldReturnSomethingWhenEmpty() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("text is empty");
-        anagramMaker.makeAnagram("").isEmpty();
+    void makeAnagramShouldReturnSomethingWhenEmpty() {
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                () -> anagramMaker.makeAnagram(""));
+        assertEquals("text is empty", exception.getMessage());
     }
 
     @Test
-    public void makeAnagramShouldReturnSomethingWhenSingleSpace() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("text contains only spaces or/and tabs");
-        anagramMaker.makeAnagram("  ");
+    void makeAnagramShouldReturnSomethingWhenSingleSpace() {
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                () -> anagramMaker.makeAnagram("  "));
+        assertEquals("text contains only spaces or/and tabs", exception.getMessage());
     }
 
     @Test
-    public void makeAnagramShouldReturnSomethingWhenSingleChar() {
+    void makeAnagramShouldReturnSomethingWhenSingleChar() {
         String actual = anagramMaker.makeAnagram("q");
         String expected = "q";
 
@@ -49,7 +45,7 @@ public class AnagramMakerTest {
     }
 
     @Test
-    public void makeAnagramShouldReturnSomethingWhenMultipleLetter() {
+    void makeAnagramShouldReturnSomethingWhenMultipleLetter() {
         String actual = anagramMaker.makeAnagram("eeeee");
         String expected = "eeeee";
 
@@ -57,7 +53,7 @@ public class AnagramMakerTest {
     }
 
     @Test
-    public void makeAnagramShouldReturnSomethingWhenSingleCharSameCharacterLowerUpperCases() {
+    void makeAnagramShouldReturnSomethingWhenSingleCharSameCharacterLowerUpperCases() {
         String actual = anagramMaker.makeAnagram("qqqqEEEE");
         String expected = "EEEEqqqq";
 
@@ -65,7 +61,7 @@ public class AnagramMakerTest {
     }
 
     @Test
-    public void makeAnagramShouldReturnSomethingWhenOnlySymbols() {
+    void makeAnagramShouldReturnSomethingWhenOnlySymbols() {
         String actual = anagramMaker.makeAnagram("123");
         String expected = "123";
 
@@ -73,7 +69,7 @@ public class AnagramMakerTest {
     }
 
     @Test
-    public void makeAnagramShouldReturnSomethingWhenSeveralWords() {
+    void makeAnagramShouldReturnSomethingWhenSeveralWords() {
         String actual = anagramMaker.makeAnagram("Egor Shaleev");
         String expected = "rogE veelahS";
 
