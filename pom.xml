@@ -9,11 +9,10 @@
     <packaging>jar</packaging>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <argLine>-XX:MaxPermSize=512m</argLine>
         <jacoco.version>0.8.6</jacoco.version>
         <surefire.version>2.22.0</surefire.version>
-        <junit.jupiter.api>5.4.1</junit.jupiter.api>
-        <junit.jupiter.engine>5.4.0</junit.jupiter.engine>
+        <junit.jupiter.api>5.8.2</junit.jupiter.api>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -29,7 +28,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.engine}</version>
+            <version>${junit.jupiter.api}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -40,51 +39,50 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
-                <configuration>
-
-                </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <executions>
-                    <execution>
-                        <id>default-prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-report</id>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <rule>
-                                    <element>BUNDLE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>COMPLEXITY</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.90</minimum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <executions>
+                <execution>
+                    <id>default-prepare-agent</id>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>default-report</id>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>default-check</id>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                    <configuration>
+                        <rules>
+                            <rule>
+                                <element>PACKAGE</element>
+                                <excludes>
+                                    <exclude>**/*AnagramConsoleApplication.class</exclude>
+                                </excludes>
+                                <limits>
+                                    <limit>
+                                        <counter>COMPLEXITY</counter>
+                                        <value>COVEREDRATIO</value>
+                                        <minimum>0.90</minimum>
+                                        <outputDirectory>C:\Users\Егор Дмитриевич\IdeaProjects\myAnagram1\target\site</outputDirectory>
+                                    </limit>
+                                </limits>
+                            </rule>
+                        </rules>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 </project>
