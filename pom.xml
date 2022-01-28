@@ -63,18 +63,18 @@
                         <goal>check</goal>
                     </goals>
                     <configuration>
+                        <excludes>
+                            <exclude>**/*AnagramConsoleApplication.class</exclude>
+                        </excludes>
                         <rules>
                             <rule>
                                 <element>PACKAGE</element>
-                                <excludes>
-                                    <exclude>**/*AnagramConsoleApplication.class</exclude>
-                                </excludes>
+
                                 <limits>
                                     <limit>
                                         <counter>COMPLEXITY</counter>
                                         <value>COVEREDRATIO</value>
                                         <minimum>0.90</minimum>
-                                        <outputDirectory>C:\Users\Егор Дмитриевич\IdeaProjects\myAnagram1\target\site</outputDirectory>
                                     </limit>
                                 </limits>
                             </rule>

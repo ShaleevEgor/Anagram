@@ -36,6 +36,13 @@ public class AnagramMaker {
                 endIndex--;
                 startIndex++;
             }
+            if (!Character.isAlphabetic(wordCharacters[endIndex])) {
+                endIndex--;
+            } else {
+                swapItems(startIndex, endIndex, wordCharacters);
+                endIndex--;
+                startIndex++;
+            }
         }
         return String.valueOf(wordCharacters);
     }
