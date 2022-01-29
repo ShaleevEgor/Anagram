@@ -31,10 +31,6 @@ public class AnagramMaker {
         while (startIndex < endIndex) {
             if (!Character.isAlphabetic(wordCharacters[startIndex])) {
                 startIndex++;
-            } else {
-                swapItems(startIndex, endIndex, wordCharacters);
-                endIndex--;
-                startIndex++;
             }
             if (!Character.isAlphabetic(wordCharacters[endIndex])) {
                 endIndex--;
